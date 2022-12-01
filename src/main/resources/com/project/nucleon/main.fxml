@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: red;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.nucleon.MainController">
+   <children>
+      <VBox alignment="CENTER" layoutX="250.0" layoutY="88.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="LbLicence" text="Licence" textFill="RED">
+               <font>
+                  <Font name="Impact" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="TfLicenceKey" alignment="CENTER" maxWidth="300.0" promptText="saisir une clé valide" style="-fx-background-color: none; -fx-border-color: red;">
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <Button fx:id="BuConfirmLicenceKey" mnemonicParsing="false" onAction="#confirmLicenceKey" style="-fx-background-color: none; -fx-border-color: red;" text="OK" textFill="RED" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
