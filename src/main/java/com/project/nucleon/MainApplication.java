@@ -1,5 +1,6 @@
 package com.project.nucleon;
 
+import com.project.nucleon.Database.NucleonDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +16,14 @@ public class MainApplication extends Application {
         stage.setTitle("Nucleon");
         stage.setScene(scene);
         stage.show();
+
+        if(NucleonDAO.getInstance() != null) {
+
+            System.out.println("Connexion à la base de données réussi");
+        } else {
+            System.out.println("Connexion échoué");
+        }
+
     }
 
     public static void main(String[] args) {

@@ -10,6 +10,8 @@ module com.project.nucleon {
     requires org.kordamp.bootstrapfx.core;
     //requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.sql;
+    requires mysql.connector.java;
 
     opens com.project.nucleon to javafx.fxml;
     exports com.project.nucleon;
