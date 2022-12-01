@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: cyan;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nucleon.project.Controller.LicenceController">
+   <children>
+      <VBox alignment="CENTER" layoutX="250.0" layoutY="78.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Licence key " textFill="#00ffee">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField alignment="CENTER" maxWidth="450.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" promptText="Enter a valid licence key" style="-fx-background-color: none; -fx-border-color: cyan; -fx-border-radius: 20;" />
+            <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: cyan;" text="OK" textAlignment="CENTER" textFill="#00fff8">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font></Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
