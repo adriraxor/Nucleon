@@ -15,4 +15,5 @@ module com.project.nucleon {
 
     opens com.project.nucleon to javafx.fxml;
     exports com.project.nucleon;
+
 }

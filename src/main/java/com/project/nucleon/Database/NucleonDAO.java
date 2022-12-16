@@ -1,9 +1,8 @@
 package com.project.nucleon.Database;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import com.almasb.fxgl.input.Input;
+
+import java.io.*;
 import java.sql.*;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -20,7 +19,6 @@ public class NucleonDAO {
     private static String nomUtilisateur;
     private static String motDePasse;
     private static String chaineConnexion;
-
     private Connection connexion;
     private static NucleonDAO nucleonDAO = null;
 
@@ -30,25 +28,22 @@ public class NucleonDAO {
      * méthode publique statique getNucleonDao
      *
      */
-    private NucleonDAO() {
+    private NucleonDAO() throws IOException {
 
-        InputStream inputStream = NucleonDAO.class.getClassLoader().getResourceAsStream("db.properties");
-        Properties properties = new Properties();
+        Properties properties   = new Properties();
+        System.out.println(this.getClass().getClassLoader());
 
-        if(inputStream==null){
-            System.out.println("Impossible de trouver db.properties");
-            return;
-        }
+        FileInputStream fileInputStream = new FileInputStream("src/main/resources/com/project/nucleon/db.properties");
 
         try {
-            properties.load(inputStream);
-
-            System.out.println(NucleonDAO.nomServeur);
+            properties.load(fileInputStream);
 
             NucleonDAO.nomServeur     = properties.getProperty("db.host");
             NucleonDAO.nomBdd         = properties.getProperty("db.db");
             NucleonDAO.motDePasse     = properties.getProperty("db.pass");
             NucleonDAO.nomUtilisateur = properties.getProperty("db.user");
+
+            System.out.println(NucleonDAO.nomServeur);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -67,6 +62,8 @@ public class NucleonDAO {
         } catch (SQLException ex) {
             Logger.getLogger(NucleonDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        fileInputStream.close();
     }
 
     /**
@@ -74,19 +71,19 @@ public class NucleonDAO {
      *
      * @return un Objet DaoSIO avec connexion active ... pour une certaine durée
      */
-    public static NucleonDAO getInstance() {
+    public static NucleonDAO getInstance() throws IOException {
 
         if (NucleonDAO.nucleonDAO == null) {
             NucleonDAO.nucleonDAO = new NucleonDAO();
         } else {
-            if (!NucleonDAO.nucleonDAO.connexionActive()) {
+            if (!NucleonDAO.nucleonDAO.isActive()) {
                 NucleonDAO.nucleonDAO = new NucleonDAO();
             }
         }
         return NucleonDAO.nucleonDAO;
     }
 
-    public Boolean connexionActive() {
+    public Boolean isActive() {
         Boolean connexionActive = true;
         try {
             if (this.connexion.isClosed()) {
@@ -103,12 +100,12 @@ public class NucleonDAO {
      * @param sql, comportera un ordre selec
      * @return
      */
-    public ResultSet requeteSelection(String sql) {
+    public ResultSet selectRequest(String sql) {
         try {
             Statement requete = new NucleonDAO().connexion.createStatement();
             return requete.executeQuery(sql);
 
-        } catch (SQLException ex) {
+        } catch (SQLException | IOException ex) {
             Logger.getLogger(NucleonDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -120,13 +117,13 @@ public class NucleonDAO {
      * @return le nombre de lignes impactées par la requête action
      *
      */
-    public Integer requeteAction(String sql) {
+    public Integer actionRequest(String sql) {
 
         try {
             Statement requete = new NucleonDAO().connexion.createStatement();
             return requete.executeUpdate(sql);
 
-        } catch (SQLException ex) {
+        } catch (SQLException | IOException ex) {
             Logger.getLogger(NucleonDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
